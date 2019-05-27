@@ -1,5 +1,6 @@
 package com.ericmulek.springsecuritytest.controller
 
+import com.ericmulek.springsecuritytest.controller.annotations.VerifyFeature
 import groovy.util.logging.Slf4j
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 class TestController {
 
     @GetMapping('path1')
+    @VerifyFeature(feature = 'SendMessageType1')
     @ResponseBody
     String testEndpoint(){
         log.info('testEndpoint')
@@ -19,6 +21,7 @@ class TestController {
     }
 
     @GetMapping('path2')
+    @VerifyFeature(feature = 'SendMessageType2')
     ResponseEntity<String> testEndpoint2(){
         log.info('testEndpoint2')
         new ResponseEntity<String>('Hello World', HttpStatus.OK)

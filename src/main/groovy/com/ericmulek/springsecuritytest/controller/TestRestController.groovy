@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 class TestRestController {
 
     @GetMapping('path3')
-    @VerifyFeature(feature = 'SendFhirLoadMpi')
+    @VerifyFeature(feature = 'SendMessageType3')
     String testEndpoint3() {
         log.info('testEndpoint3')
         'Hello Rest World'

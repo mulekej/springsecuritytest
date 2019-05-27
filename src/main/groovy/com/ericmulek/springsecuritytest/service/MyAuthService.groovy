@@ -10,6 +10,6 @@ class MyAuthService {
     }
 
     boolean verifyFeature(String feature) {
-        false
+        feature == 'SendMessageType3'
     }
 }
