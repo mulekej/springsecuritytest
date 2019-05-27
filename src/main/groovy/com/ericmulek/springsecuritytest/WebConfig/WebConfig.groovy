@@ -1,6 +1,6 @@
 package com.ericmulek.springsecuritytest.WebConfig
 
-import com.ericmulek.springsecuritytest.controller.intercept.CertificateAuthInterceptor
+import com.ericmulek.springsecuritytest.controller.intercept.AuthenticateUserInterceptor
 import com.ericmulek.springsecuritytest.controller.intercept.ValidateHeadersPresentInterceptor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
@@ -13,7 +13,7 @@ class WebConfig implements WebMvcConfigurer {
 //    @Autowired
 //    ValidateHeadersPresentInterceptor validateHeadersInterceptor
     @Autowired
-    CertificateAuthInterceptor certificateAuthInterceptor
+    AuthenticateUserInterceptor certificateAuthInterceptor
 
 
     @Override

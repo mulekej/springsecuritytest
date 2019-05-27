@@ -1,5 +1,6 @@
 package com.ericmulek.springsecuritytest.controller
 
+import com.ericmulek.springsecuritytest.controller.annotations.HandleAuditTrail
 import com.ericmulek.springsecuritytest.controller.annotations.VerifyFeature
 import groovy.util.logging.Slf4j
 import org.springframework.web.bind.annotation.GetMapping
@@ -11,6 +12,7 @@ class TestRestController {
 
     @GetMapping('path3')
     @VerifyFeature(feature = 'SendMessageType3')
+    @HandleAuditTrail
     String testEndpoint3() {
         log.info('testEndpoint3')
         'Hello Rest World'

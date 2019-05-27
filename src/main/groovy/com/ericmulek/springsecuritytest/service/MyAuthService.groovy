@@ -1,5 +1,6 @@
 package com.ericmulek.springsecuritytest.service
 
+
 import org.springframework.stereotype.Service
 
 @Service
@@ -11,5 +12,9 @@ class MyAuthService {
 
     boolean verifyFeature(String feature) {
         feature == 'SendMessageType3'
+    }
+
+    Object getEndpoint(String identifier){
+        new Boolean(true)
     }
 }

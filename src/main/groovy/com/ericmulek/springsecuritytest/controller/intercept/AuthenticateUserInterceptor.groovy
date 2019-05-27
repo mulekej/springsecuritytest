@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse
 
 @Component
 @Slf4j
-class CertificateAuthInterceptor extends HandlerInterceptorAdapter {
+class AuthenticateUserInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
     MyAuthService authService
