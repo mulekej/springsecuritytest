@@ -8,4 +8,8 @@ class MyAuthService {
     boolean authenticateCert(String subject, String issuer) {
         true
     }
+
+    boolean verifyFeature(String feature) {
+        false
+    }
 }

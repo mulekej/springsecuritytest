@@ -1,20 +1,40 @@
 package com.ericmulek.springsecuritytest.controller.annotations
 
+import com.ericmulek.springsecuritytest.service.MyAuthService
 import groovy.util.logging.Slf4j
+import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
+import org.aspectj.lang.reflect.MethodSignature
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 import org.springframework.web.server.ResponseStatusException
+
+import java.lang.reflect.Method
 
 @Aspect
 @Component
 @Slf4j
 class MyPointCut {
 
+    @Autowired
+    MyAuthService authService
+
     @Before('@annotation(VerifyFeature)')
-    void doThingHere() {
-        log.info('in pointcut')
-        throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, 'Ya dun goofed')
+    void doThingHere(JoinPoint joinPoint) {
+        String feature = extractFeature(joinPoint)
+        log.info("in pointcut feature=$feature")
+        if(!authService.verifyFeature(feature)) {
+            throw new ResponseStatusException(HttpStatus.OK, 'Feature Not Excepted')
+        }
+    }
+
+    private String extractFeature(JoinPoint joinPoint) {
+        MethodSignature methodSignature = joinPoint.getSignature() as MethodSignature
+        Method method = methodSignature.getMethod()
+        VerifyFeature annotation = method.getAnnotation(VerifyFeature)
+        String feature = annotation.feature()
+        feature
     }
 }
