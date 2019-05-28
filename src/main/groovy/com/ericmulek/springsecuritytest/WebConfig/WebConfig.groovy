@@ -18,7 +18,7 @@ class WebConfig implements WebMvcConfigurer {
 
     @Override
     void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new ValidateHeadersPresentInterceptor()).addPathPatterns('/path3')
+        registry.addInterceptor(new ValidateHeadersPresentInterceptor()).addPathPatterns('/path4')
         registry.addInterceptor(certificateAuthInterceptor).addPathPatterns('/path3')
     }
 }
