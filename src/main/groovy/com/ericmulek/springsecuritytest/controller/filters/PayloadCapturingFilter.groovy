@@ -19,10 +19,12 @@ class PayloadCapturingFilter extends OncePerRequestFilter{
 
         ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request)
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response)
+        log.info('Step 0: Set Caching Wrapper on servlet request/response')
 
         filterChain.doFilter(requestWrapper, responseWrapper)
-        log.info("******************** ${responseWrapper.contentInputStream.text}")
-        log.info("******************** ${new String(requestWrapper.contentAsByteArray)}")
+        log.info("""Step 7: Capture raw contents
+                        Inbound Request: ${new String(requestWrapper.contentAsByteArray)}
+                        Outbound Resposne: ${responseWrapper.contentInputStream.text}""")
         responseWrapper.copyBodyToResponse()
     }
 
