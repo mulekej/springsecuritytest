@@ -25,6 +25,7 @@ class TestRestController {
     @VerifyFeature(feature = 'SendMessageType3')
     @HandleAuditTrail
     String acceptPerson(@RequestBody Person person) {
-        log.info("$person.firstName - $person.lastName")
+        log.info("Step 5: In Controller. $person.firstName - $person.lastName")
+        'My Response String'
     }
 }

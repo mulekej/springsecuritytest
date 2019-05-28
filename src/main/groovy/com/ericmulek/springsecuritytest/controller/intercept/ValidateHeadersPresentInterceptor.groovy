@@ -16,7 +16,7 @@ class ValidateHeadersPresentInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info('VALIDATE HEADER')
+        log.info('Step 1: Validating Headers are present')
         //get request headers
 
         //validate headers present

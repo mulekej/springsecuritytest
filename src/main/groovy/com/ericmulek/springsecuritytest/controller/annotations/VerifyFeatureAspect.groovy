@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
 import org.aspectj.lang.reflect.MethodSignature
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.core.annotation.Order
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 import org.springframework.web.server.ResponseStatusException
@@ -17,6 +18,7 @@ import java.lang.reflect.Method
 @Aspect
 @Component
 @Slf4j
+@Order(0)
 class VerifyFeatureAspect {
 
     @Autowired
@@ -28,7 +30,7 @@ class VerifyFeatureAspect {
     @Before('@annotation(VerifyFeature)')
     void doThingHere(JoinPoint joinPoint) {
         String feature = extractFeature(joinPoint)
-        log.info("in pointcut feature=$feature")
+        log.info("Step 3: VerifyFeature feature=$feature")
         if(!authService.verifyFeature(feature)) {
             throw new ResponseStatusException(HttpStatus.OK, 'Feature Not Excepted')
         }

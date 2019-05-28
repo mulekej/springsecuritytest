@@ -22,7 +22,7 @@ class AuthenticateUserInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info('CERT CHECK')
+        log.info('Step 2: Do some user Authentication')
         def newAttribute = authService.authenticateCert('clientSubject', 'clientIssuer')
         //if needed, set some value onto the request attrs
         request.setAttribute('someNewValue', new Object())
