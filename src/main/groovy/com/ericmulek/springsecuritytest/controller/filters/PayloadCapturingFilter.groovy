@@ -28,4 +28,9 @@ class PayloadCapturingFilter extends OncePerRequestFilter{
         responseWrapper.copyBodyToResponse()
     }
 
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.servletPath
+        !path.endsWith('/path4')
+    }
 }
