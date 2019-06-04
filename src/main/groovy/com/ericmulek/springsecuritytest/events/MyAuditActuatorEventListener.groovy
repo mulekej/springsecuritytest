@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull
 @Component
 class MyAuditActuatorEventListener {
 
-    @Async
+    @Async('asyncThreadPool')
     @EventListener
     void myFirstListener(@NotNull InitialAuditEvent event) {
         sleep(3000)
@@ -19,7 +19,7 @@ class MyAuditActuatorEventListener {
         log.info("Step4b: Recieved Event from ${event.messageId}")
     }
 
-    @Async
+    @Async('asyncThreadPool')
     @EventListener
     void myFirstListener(@NotNull FollowupAuditEvent event) {
         log.info("Listner2: Recieved Follow upEvent for ${event.auditId}")

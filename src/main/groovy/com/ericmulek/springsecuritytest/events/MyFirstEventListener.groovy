@@ -38,7 +38,7 @@ class MyFirstEventListener {
 //    }
 
     //todo make separate class so there's no risk of accessing the httpServletRequest in the async
-    @Async
+    @Async('asyncThreadPool')
     @EventListener
     void MyFollowupListener(@NotNull FollowupAuditEvent event) {
         log.info("Listner1: Recieved Event for ${event.auditId}")
