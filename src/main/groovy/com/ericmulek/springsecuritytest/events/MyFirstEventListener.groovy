@@ -21,7 +21,7 @@ class MyFirstEventListener {
 
     @EventListener
     void myFirstListener(@NotNull InitialAuditEvent event) {
-        log.info("Listner1: Recieved Event from ${event.messageId}")
+        log.info("Step 4a: Recieved Event from ${event.messageId}")
         auditTrailService.sendInitialAudit(event)
     }
 

@@ -16,7 +16,7 @@ class MyAuditActuatorEventListener {
     void myFirstListener(@NotNull InitialAuditEvent event) {
         sleep(3000)
         log.info('Sometime Later...')
-        log.info("Listner2: Recieved Event from ${event.messageId}")
+        log.info("Step4b: Recieved Event from ${event.messageId}")
     }
 
     @Async
