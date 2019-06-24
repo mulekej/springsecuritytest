@@ -1,10 +1,12 @@
 package com.ericmulek.springsecuritytest.controller
 
-
 import com.ericmulek.springsecuritytest.controller.annotations.AuditTrailEnabled
+import com.ericmulek.springsecuritytest.controller.annotations.PostFilter
 import com.ericmulek.springsecuritytest.controller.annotations.VerifyFeature
 import com.ericmulek.springsecuritytest.domain.Person
+import com.ericmulek.springsecuritytest.service.AnExternalService
 import groovy.util.logging.Slf4j
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController
 @Slf4j
 @AuditTrailEnabled
 class TestRestController {
+
+    @Autowired
+    AnExternalService externalService
 
     @GetMapping('path3')
     @VerifyFeature(feature = 'SendMessageType3')
@@ -28,6 +33,14 @@ class TestRestController {
     String acceptPerson(@RequestBody Person person) {
         log.info("Step 5: In Controller. $person.firstName - $person.lastName")
         'My Response String'
+    }
+
+    @GetMapping('path5')
+    @VerifyFeature(feature = 'SendMessageType3')
+    @PostFilter('FilterHiddenData')
+    List<Person> getPerson() {
+
+        externalService.getPeople()
     }
 
     @ExceptionHandler
