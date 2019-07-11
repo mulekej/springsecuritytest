@@ -21,10 +21,16 @@ class TestRestController {
     @Autowired
     AnExternalService externalService
 
+    @Autowired
+    Person systemUser
+    @Autowired
+    Map threadProperties
+
     @GetMapping('path3')
     @VerifyFeature(feature = 'SendMessageType3')
     String testEndpoint3() {
         log.info('testEndpoint3')
+        log.info("Name=$systemUser.firstName")
         'Hello Rest World'
     }
 
