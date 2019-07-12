@@ -1,7 +1,9 @@
 package com.ericmulek.springsecuritytest.WebConfig
 
-import com.ericmulek.springsecuritytest.domain.Person
+import com.ericmulek.springsecuritytest.domain.Endpoint
+import com.ericmulek.springsecuritytest.service.EndpointService
 import org.springframework.beans.BeansException
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory
 import org.springframework.context.annotation.Bean
@@ -13,11 +15,8 @@ import org.springframework.context.support.SimpleThreadScope
 @Configuration
 class config {
 
-    @Bean
-    @Scope(scopeName = 'thread', proxyMode = ScopedProxyMode.TARGET_CLASS)
-    Person systemUser() {
-        new Person()
-    }
+    @Autowired
+    EndpointService endpointService
 
     @Bean
     @Scope(scopeName = 'thread', proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -30,10 +29,20 @@ class config {
         new BeanFactoryPostProcessor() {
             @Override
             void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-                beanFactory.registerScope("thread", new SimpleThreadScope());
+                beanFactory.registerScope("thread", new SimpleThreadScope())
             }
-        };
+        }
     }
 
+    @Bean
+    @Scope(scopeName = 'prototype', proxyMode = ScopedProxyMode.TARGET_CLASS)
+    List<Endpoint> thirdPartyEndpoints() {
+        endpointService.thirdPartyEndpoints
+    }
 
+    @Bean
+    @Scope(scopeName = 'prototype', proxyMode = ScopedProxyMode.TARGET_CLASS)
+    List<Endpoint> internalEndpoints() {
+        endpointService.internalEndpoints
+    }
 }

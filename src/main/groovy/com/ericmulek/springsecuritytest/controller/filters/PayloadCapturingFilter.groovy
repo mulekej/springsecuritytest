@@ -1,6 +1,6 @@
 package com.ericmulek.springsecuritytest.controller.filters
 
-import com.ericmulek.springsecuritytest.domain.Person
+
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -17,8 +17,6 @@ import javax.servlet.http.HttpServletResponse
 @Slf4j
 class PayloadCapturingFilter extends OncePerRequestFilter{
 
-    @Autowired
-    Person systemUser
     @Autowired
     Map threadProperties
 
@@ -39,6 +37,6 @@ class PayloadCapturingFilter extends OncePerRequestFilter{
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.servletPath
-        !path.endsWith('/path4')
+        !path.endsWith('/path3')
     }
 }

@@ -6,8 +6,4 @@ class Person {
     String firstName
     String lastName
     boolean hidden = false
-
-    static cleanAll() {
-
-    }
 }

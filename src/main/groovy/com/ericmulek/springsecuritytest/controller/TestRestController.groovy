@@ -20,17 +20,14 @@ class TestRestController {
 
     @Autowired
     AnExternalService externalService
-
-    @Autowired
-    Person systemUser
     @Autowired
     Map threadProperties
 
     @GetMapping('path3')
     @VerifyFeature(feature = 'SendMessageType3')
     String testEndpoint3() {
-        log.info('testEndpoint3')
-        log.info("Name=$systemUser.firstName")
+        threadProperties['bob'] = 'hello'
+        log.info(externalService.thingsFromOtherServices.join(';'))
         'Hello Rest World'
     }
 
@@ -43,7 +40,7 @@ class TestRestController {
 
     @GetMapping('path5')
     @VerifyFeature(feature = 'SendMessageType3')
-    @PostFilter('FilterHiddenData')
+    @PostFilter
     List<Person> getPerson() {
 
         externalService.getPeople()
