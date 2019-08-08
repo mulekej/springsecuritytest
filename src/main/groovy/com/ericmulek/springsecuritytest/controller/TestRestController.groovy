@@ -4,6 +4,7 @@ import com.ericmulek.springsecuritytest.controller.annotations.AuditTrailEnabled
 import com.ericmulek.springsecuritytest.controller.annotations.PostFilter
 import com.ericmulek.springsecuritytest.controller.annotations.VerifyFeature
 import com.ericmulek.springsecuritytest.domain.Person
+import com.ericmulek.springsecuritytest.request.CustomThreadScopedAttributes
 import com.ericmulek.springsecuritytest.service.AnExternalService
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,12 +22,12 @@ class TestRestController {
     @Autowired
     AnExternalService externalService
     @Autowired
-    Map threadProperties
+    CustomThreadScopedAttributes attributes
 
     @GetMapping('path3')
     @VerifyFeature(feature = 'SendMessageType3')
     String testEndpoint3() {
-        threadProperties['bob'] = 'hello'
+        attributes.threadName = Thread.currentThread().name
         log.info(externalService.thingsFromOtherServices.join(';'))
         'Hello Rest World'
     }

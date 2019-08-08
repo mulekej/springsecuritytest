@@ -1,8 +1,6 @@
 package com.ericmulek.springsecuritytest.controller.filters
 
-
 import groovy.util.logging.Slf4j
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import org.springframework.web.util.ContentCachingRequestWrapper
@@ -15,14 +13,10 @@ import javax.servlet.http.HttpServletResponse
 
 @Component
 @Slf4j
-class PayloadCapturingFilter extends OncePerRequestFilter{
-
-    @Autowired
-    Map threadProperties
+class PayloadCapturingFilter extends OncePerRequestFilter {
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, java.io.IOException {
-        threadProperties.clear()
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request)
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response)
         log.info('Step 0: Set Caching Wrapper on servlet request/response')
