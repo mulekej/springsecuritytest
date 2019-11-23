@@ -58,6 +58,12 @@ class TestRestController {
         temp.get()
     }
 
+    @GetMapping('path7')
+    String path7() {
+        externalService.process()
+        ''
+    }
+
     @ExceptionHandler
     String errorHandler(Exception e) {
         log.info("Handling Exception ${e.class}")

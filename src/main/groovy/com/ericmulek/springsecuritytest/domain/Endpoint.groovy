@@ -5,4 +5,5 @@ class Endpoint {
     String path
     String token
     String timestamp
+    List<String> states
 }
